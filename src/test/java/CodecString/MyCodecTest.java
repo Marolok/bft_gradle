@@ -2,14 +2,20 @@ package CodecString;
 
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.UnsupportedEncodingException;
 
 public class MyCodecTest extends TestCase {
-    @Autowired
+    //@Autowired
     protected MyCodec myCodec;
+
+    @Before
+    public void init(){
+        myCodec = new MyCodec();
+    }
 
     @Test
     public void testCodec() throws UnsupportedEncodingException {

@@ -19,15 +19,19 @@ import java.io.UnsupportedEncodingException;
 
 @Component
 public class MyCodec {
+    protected Base64 base;
+
+    MyCodec(){
+        this.base = new Base64();
+    }
+
     /**
      * Кодирует сообщение(secret).
      * @param secret
      * @return
      * @throws java.io.UnsupportedEncodingException
      */
-    public static String getCodingString(String secret) throws UnsupportedEncodingException
-    {
-        Base64 base = new Base64();
+    public String getCodingString(String secret) throws UnsupportedEncodingException {
         byte[] secretByte = secret.getBytes("UTF8");
         byte[] secretEncode = base.encode(secretByte);
         return new String(secretEncode,"UTF8");
@@ -39,9 +43,7 @@ public class MyCodec {
      * @return
      * @throws UnsupportedEncodingException
      */
-    public static String getDecodingString(String secret) throws UnsupportedEncodingException
-    {
-        Base64 base = new Base64();
+    public String getDecodingString(String secret) throws UnsupportedEncodingException {
         byte[] secretByte = secret.getBytes("UTF8");
         byte[] secretDecode = base.decode(secretByte);
         return new String(secretDecode,"UTF8");

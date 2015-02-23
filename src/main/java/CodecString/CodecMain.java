@@ -1,10 +1,7 @@
 package CodecString;
 
 import org.apache.commons.cli.*;
-import org.apache.commons.codec.binary.Base64;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.UnsupportedEncodingException;
 
 /*
  * gradle_1.CodecString
@@ -17,9 +14,9 @@ import java.io.UnsupportedEncodingException;
  *
  * License from MarCOM
  */
+
 public class CodecMain {
-    @Autowired
-    protected static MyCodec codec;
+
 
     /**
      * Возвращает отпарсенную командную строку(args) согласно настроенным опциям(options).
@@ -40,26 +37,24 @@ public class CodecMain {
      * @param args
      */
     public static void main(String[] args) {
-        String str1 = "Marolok";
         Options options = new Options();
         // Тут добавляются новые опции(Options) для парсера командной строки.
         options.addOption( "s", "string", true, "test String ." );
         //-------------
         try
         {
+            String str1 = "NULL";
             CommandLine line = getCommandLine(options, args);
             if(line.hasOption("string")){
                 str1 = line.getOptionValue("string");
             }
-            // Кодируем
-            String str2 = codec.getCodingString(str1);
-            // Декодируем закодированное
-            String str3 = codec.getDecodingString(str2);
+            Coder coder = new Coder();
+            coder.setSecret(str1);
             // Выводим результат
             System.out.println(
-                    "FROM - "+str1+"\n" +
-                    "TO/FROM - "+str2+"\n" +
-                    "TO - "+str3);
+                    "FROM - "+coder.getSecret()+"\n" +
+                    "TO/FROM - "+coder.getCodingSecret()+"\n" +
+                    "TO - "+coder.getDecodingSecret());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
