@@ -14,8 +14,11 @@ public class MyCodecTest extends TestCase {
     @Test
     public void testCodec() throws UnsupportedEncodingException {
         String secret = "MarolokString";
+        //Кодируем
         String codingSecret = myCodec.getCodingString(secret);
+        //Декодируем
         String decodingSecret = myCodec.getDecodingString(codingSecret);
+        //Сравниваем
         Assert.assertArrayEquals("Неправильно кодировал/декодировал.",secret.getBytes(),decodingSecret.getBytes());
     }
 
